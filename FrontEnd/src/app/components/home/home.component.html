@@ -1,0 +1,305 @@
+<div class="wrapper">
+  <!-- SideBar -->
+  <div class="col-4">
+    <div class="flex-shrink-0 p-3 bg-light" style="width: 280px;">
+      <a href="/home" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+        <span class="fs-5 fw-semibold">CE DataBase</span>
+      </a>
+
+      <!-- Lista de elementos del SideBar -->
+      <ul class="list-unstyled ps-0">
+
+        <li class="mb-1">
+          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+            data-bs-target="#account-collapse" aria-expanded="false">
+            Account
+          </button>
+          <div class="collapse" id="account-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="/" class="link-dark rounded">Sign out</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <button type="submit" class="btn btn-primary" (click)="submit()">Commit</button>
+
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- Page content -->
+  <div id="content" class="col-8">
+
+    <!-- Navegation bar, aquí se colocan los botones para mostrar
+        los formularios -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+        <button type="submit" class="btn btn-primary" (click)="createCardChange()">CREATE</button>
+
+        <button type="button" id="sidebarCollapse" class="btn btn-info" (click)="selectCardChange()">
+          <i class="fas fa-align-left"></i>
+          <span>SELECT</span>
+        </button>
+
+        <button type="button" id="sidebarCollapse" class="btn btn-info" (click)="insertCardChange()">
+          <i class="fas fa-align-left"></i>
+          <span>INSERT</span>
+        </button>
+
+        <button type="button" id="sidebarCollapse" class="btn btn-info" (click)="deleteCardChange()">
+          <i class="fas fa-align-left"></i>
+          <span>DELETE</span>
+        </button>
+
+        <button type="button" id="sidebarCollapse" class="btn btn-info" (click)="updateCardChange()">
+          <i class="fas fa-align-left"></i>
+          <span>UPDATE</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- CARD FORMS -->
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <!-- CREATE XML STORE Form -->
+          <div class="card animate__animated animate__zoomIn" *ngIf="createCardStatus">
+            <div class="card-body">
+              <h5 class="card-title">Create XML Store</h5>
+
+              <form class="row g-3" autocomplete="off" [formGroup]="createForm" (ngSubmit)="createSubmit()">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Name"
+                      formControlName="name" />
+                    <label for="floatingName">Name</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingAttribute1" placeholder="Attribute 1"
+                      formControlName="atributte1">
+                    <label for="floatingAttribute1">Attribute 1</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingAttribute2" placeholder="Attribute 2"
+                      formControlName="atributte2">
+                    <label for="floatingAttribute2">Attribute 2</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingAttribute3" placeholder="Attribute 3"
+                      formControlName="atributte3">
+                    <label for="floatingAttribute3">Attribute 3</label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!-- END CREATE XML STORE Form -->
+
+          <!-- SELECT XML STORE Form -->
+          <div class="card animate__animated animate__zoomIn" *ngIf="selectCardStatus">
+            <div class="card-body">
+              <h5 class="card-title">SELECT</h5>
+
+              <form class="row g-3" autocomplete="off" [formGroup]="selectForm" (ngSubmit)="selectSubmit()">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingSelect" placeholder="SELECT"
+                      formControlName="select">
+                    <label for="floatingSelect">SELECT</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingSelectFrom" placeholder="FROM"
+                      formControlName="from">
+                    <label for="floatingSelectFrom">FROM</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingSelectWhere" placeholder="WHERE"
+                      formControlName="where">
+                    <label for="floatingSelectWhere">WHERE</label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!-- END SELECT XML STORE Form -->
+
+          <!-- SELECT JOIN XML STORE Form -->
+          <div class="card animate__animated animate__zoomIn" *ngIf="selectCardStatus">
+            <div class="card-body">
+              <h5 class="card-title">SELECT JOIN</h5>
+
+              <form class="row g-3" autocomplete="off" [formGroup]="selectJoinForm" (ngSubmit)="selectJoinSubmit()">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingSelectJoin" placeholder="SELECT"
+                      formControlName="select">
+                    <label for="floatingSelectJoin">SELECT</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingFrom" placeholder="FROM" formControlName="from">
+                    <label for="floatingFrom">FROM</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatinInnerJoin" placeholder="INNER JOIN"
+                      formControlName="innerJoin">
+                    <label for="floatinInnerJoin">INNER JOIN</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingON" placeholder="ON" formControlName="on">
+                    <label for="floatingON">ON</label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!-- END SELECT JOIN XML STORE Form -->
+
+          <!-- INSERT XML STORE Form -->
+          <div class="card animate__animated animate__zoomIn" *ngIf="insertCardStatus">
+            <div class="card-body">
+              <h5 class="card-title">INSERT</h5>
+
+              <form class="row g-3" autocomplete="off" [formGroup]="insertForm" (ngSubmit)="insertSubmit()">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingInsertInto" placeholder="INSERT INTO"
+                      formControlName="insertInto">
+                    <label for="floatingInsertInto">INSERT INTO</label>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingValues" placeholder="VALUES"
+                      formControlName="values">
+                    <label for="floatingValues">VALUES</label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!-- END INSERT XML STORE Form -->
+
+          <!-- DELETE XML STORE Form -->
+          <div class="card animate__animated animate__zoomIn" *ngIf="deleteCardStatus">
+            <div class="card-body">
+              <h5 class="card-title">DELETE</h5>
+
+              <form class="row g-3" autocomplete="off" [formGroup]="deleteForm" (ngSubmit)="deleteSubmit()">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingDeleteFrom" placeholder="DELETE FROM"
+                      formControlName="deleteFrom">
+                    <label for="floatingDeleteFrom">DELETE FROM</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingWhere" placeholder="WHERE"
+                      formControlName="where">
+                    <label for="floatingDeleteFrom">WHERE</label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!-- END DELETE XML STORE Form -->
+
+          <!-- UPDATE XML STORE Form -->
+          <div class="card animate__animated animate__zoomIn" *ngIf="updateCardStatus">
+            <div class="card-body">
+              <h5 class="card-title">UPDATE</h5>
+
+              <form class="row g-3" autocomplete="off" [formGroup]="updateForm" (ngSubmit)="updateSubmit()">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingUpdate" formControlName="update"
+                      placeholder="UPDATE">
+                    <label for="floatingUpdate">UPDATE</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingSet" formControlName="set" placeholder="SET">
+                    <label for="floatingSet">SET</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingWhere" formControlName="where"
+                      placeholder="WHERE">
+                    <label for="floatingWhere">WHERE</label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!-- END UPDATE XML STORE Form -->
+
+          <!-- Aquí termina todos los FORMS -->
+
+          <!-- Table -->
+          <table class="table" *ngIf="datosXml && datosXml.length > 0">
+            <thead>
+              <tr>
+                <!-- Recorre la primera fila de Datosxml para obtener los encabezados -->
+                <th *ngFor="let encabezado of datosXml[0]">{{ encabezado }}</th>
+            </thead>
+            <tbody>
+              <!-- Recorre las filas restantes de Datosxml -->
+              <tr *ngFor="let fila of datosXml.slice(1)">
+                <td *ngFor="let dato of fila">{{ dato }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</div>
